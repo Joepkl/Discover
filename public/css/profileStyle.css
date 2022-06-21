@@ -1,0 +1,72 @@
+
+
+@font-face {
+    font-family: open-sans;
+    src: url('fonts/OpenSans-Regular.ttf');
+}
+
+@font-face {
+    font-family: open-sansBold;
+    src: url('fonts/OpenSans-ExtraBold.ttf');
+}
+
+body {
+    background-color: #ffffff;
+    font-family: avenir, sans-serif;
+}
+
+header {
+    display: flex;
+    justify-content: flex-start;
+}
+
+header svg {
+    padding-top: 4%;
+    padding-left: 4%;
+}
+
+@media screen and (max-width: 500px) {
+    header {
+        display: flex;
+        justify-content: center;
+    }
+    header svg {
+        width: 300px;
+    }
+}
+
+nav {
+    width: 80vw;
+    margin-top: 3%;
+    margin-left: auto;
+    margin-right: auto;
+    display: flex;
+    justify-content: space-between;
+}
+
+nav a {
+    color: #1b4332;
+}
+
+nav a:hover {
+    text-decoration: underline #1b4332;
+}
+
+main  {
+    margin-top: 5%;
+    width: 95vw;
+    height: 100vh;
+    margin-left: auto;
+    margin-right: auto;
+    border-top: 1px solid #1b4332;
+    padding-top: 3%;
+}
+
+h1 {
+    color: #2b9348;
+    margin-left: 7%;
+}
+
+a {
+    text-decoration: none;
+}

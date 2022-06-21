@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="css/detaildStyle.css">
+    <link rel="icon" href="./public/images/logo.png">
+    <title>Document</title>
+</head>
+<body>
+    <header>
+        <svg xmlns="http://www.w3.org/2000/svg" width="257" height="58" viewBox="0 0 257 58">
+            <g id="Group_1" data-name="Group 1" transform="translate(-1037 -791)">
+              <path id="Path_1" data-name="Path 1" d="M29,0A29,29,0,1,1,0,29,29,29,0,0,1,29,0Z" transform="translate(1037 791)" fill="#2d6a4f"/>
+              <path id="Icon_map-health" data-name="Icon map-health" d="M28.53,9.99a.581.581,0,0,0-.579-.579H20.419a.581.581,0,0,1-.579-.579V1.3A.581.581,0,0,0,19.26.72H9.99a.581.581,0,0,0-.579.579V8.831a.581.581,0,0,1-.579.579H1.3A.581.581,0,0,0,.72,9.99v9.27a.581.581,0,0,0,.579.579H8.831a.581.581,0,0,1,.579.579v7.532a.581.581,0,0,0,.579.579h9.27a.581.581,0,0,0,.579-.579V20.419a.581.581,0,0,1,.579-.579h7.532a.581.581,0,0,0,.579-.579Z" transform="translate(1051.375 805.375)" fill="#fefefe"/>
+              <text id="DISCOVER" transform="translate(1102 832)" fill="#1f1f1f" font-size="35" font-family="Montserrat-Bold, Montserrat" font-weight="700"><tspan x="0" y="0">DISCOVER</tspan></text>
+            </g>
+        </svg>           
+    </header>
+    <%- include('./partials/navigation.ejs') %>
+    <main>
+    <h1><%= data.title %> </h1>
+        <article id='detail'>
+            <p><%= data.introduction %></p>
+            <ul>
+                <li><%= data.location %></li>
+                <li><%= data.businessSectors %></li>
+            </ul>
+            <article>
+                <h2>Functie omschrijving</h2>
+                <p>
+                    <%= data.description %>
+                </p>
+            </article>
+            <article>
+                <h2>Verantwoordelijkheden</h2>
+                <p>
+                    <%= data.responsibilities %>
+                </p>
+            </article>
+            <article>
+                <h2>Werkomstandigheden</h2>
+                <p>
+                    <%= data.workingConditions %>
+                </p>
+                <article>
+                    <h2>Wie ben jij?</h2>
+                    <p>
+                        <%= data.study %>
+                    </p>
+            </article>
+            <article>
+                <h2>Kernwoorden</h2>
+                <p>
+                    <%= data.keywords %>
+                </p>
+            <section>
+                <form method="POST">
+                    <button type="submit">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="43" height="40" viewBox="0 0 43 40">
+                            <path id="Icon_feather-heart" data-name="Icon feather-heart" d="M39.239,7.768a10.105,10.105,0,0,0-14.888,0L22.323,9.92,20.294,7.768a10.108,10.108,0,0,0-14.888,0,11.648,11.648,0,0,0,0,15.789l2.028,2.151L22.323,41.5,37.21,25.708l2.028-2.151a11.645,11.645,0,0,0,0-15.789Z" transform="translate(-0.823 -2.997)" fill="#2b9348" stroke="#2b9348" stroke-linecap="round" stroke-linejoin="round" stroke-width="3"/>
+                          </svg>  
+                    </button>
+                    </form>                    
+                                  
+                <button id="apply">Soliciteren</button>                  
+            </section>
+        </article>
+    </main>
+    <%- include('./partials/foot') %>

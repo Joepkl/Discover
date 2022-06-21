@@ -1,0 +1,147 @@
+/* Style for the Index page */
+
+@font-face {
+    font-family: open-sans;
+    src: url('fonts/OpenSans-Regular.ttf');
+}
+
+@font-face {
+    font-family: open-sansBold;
+    src: url('fonts/OpenSans-ExtraBold.ttf');
+}
+
+body {
+    background-color: #ffffff;
+    font-family: avenir, sans-serif;
+}
+
+header {
+    display: flex;
+    justify-content: flex-start;
+}
+
+header svg {
+    padding-top: 4%;
+    padding-left: 4%;
+}
+
+@media screen and (max-width: 500px) {
+    header {
+        display: flex;
+        justify-content: center;
+    }
+    header svg {
+        width: 300px;
+    }
+}
+
+nav {
+    width: 80vw;
+    margin-top: 3%;
+    margin-left: auto;
+    margin-right: auto;
+    display: flex;
+    justify-content: space-between;
+}
+
+nav a {
+    color: #1b4332;
+}
+
+nav a:hover {
+    text-decoration: underline #1b4332;
+}
+
+main  {
+    margin-top: 3%;
+    width: 95vw;
+    height: 100vh;
+    margin-left: auto;
+    margin-right: auto;
+    border-top: 1px solid #1b4332;
+    padding-top: 3%;
+}
+
+main h1 {
+    color: #2b9348;
+    margin-left: 7%;
+}
+
+#intro{
+    width: 80vw;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+h2 {
+    color: #1b4332;
+    margin-top: 3%;
+    margin-left: 7%;
+}
+
+main form {
+    width: 80vw;
+    margin-top: 3%;
+    margin-bottom: 3%;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+main form input {
+    width: 100%;
+    height: 30px;
+    border-radius: 15px;
+    border: 1px solid #1b4332;
+}
+
+main form input::placeholder {
+    padding-left: 3%;
+    color: #1b4332;
+}
+
+#vacatures {
+    list-style: none;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-around;
+}
+
+.vacatures-li {
+    width: 400px;
+    border: 1px solid #1b4332;
+    border-radius: 5px;
+    padding: 2%;
+    margin-bottom: 3%;
+}
+
+.vacatures-li h3 {
+    color: #1b4332;
+    font-size: 20px;
+    height: 30px;
+}
+
+.vacatures-li ul {
+    height: 100px
+}
+
+.vacatures-li p {
+    height: 150px;
+}
+
+.vacatures-li button {
+    width: 150px;
+    height: 40px;
+    background-color: #f77f00;
+    color: #fefefe;
+    border: none;
+    border-radius: 15px;
+}
+
+.vacatures-li button:hover {
+    transform: scale(0.9);
+}
+
+a {
+    text-decoration: none;
+    color: #fefefe;
+}

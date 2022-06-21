@@ -1,0 +1,132 @@
+
+* {
+    margin: 0;
+    padding: 0;
+}
+
+
+@font-face {
+    font-family: open-sans;
+    src: url('fonts/OpenSans-Regular.ttf');
+}
+
+@font-face {
+    font-family: open-sansBold;
+    src: url('fonts/OpenSans-ExtraBold.ttf');
+}
+
+body {
+    background-color: #ffffff;
+    font-family: avenir, sans-serif;
+}
+
+header {
+    display: flex;
+    justify-content: flex-start;
+}
+
+header svg {
+    padding-top: 4%;
+    padding-left: 4%;
+}
+
+@media screen and (max-width: 500px) {
+    header {
+        display: flex;
+        justify-content: center;
+    }
+    header svg {
+        width: 300px;
+    }
+}
+
+main {
+    margin-top: 5%;
+    width: 92vw;
+    height: 100vh;
+    margin-left: auto;
+    margin-right: auto;
+    border-top: 1px solid #1b4332;
+    padding-top: 3%;
+}
+
+
+
+form {
+    width: 80vw;
+    height: 50vh;
+    margin-left: auto;
+    margin-right: auto;
+    background-color: #1b4332;
+    border-radius: 15px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+}
+
+form div input {
+    height: 35px;
+    border-radius: 15px;
+    border: none;
+    background-color: #fefefe;
+}
+
+form div {
+    display: flex;
+    flex-direction: column;
+    width: 80%;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+form label {
+    color: #fefefe;
+    font-size: 18px;
+    padding-left: 3%;
+}
+
+form div:nth-of-type(2) {
+    margin-top: 3%;
+}
+
+.submit {
+    margin-top: 2%;
+}
+
+button {
+    height: 40px;
+    width: 60%;
+    margin-left: 20%;
+    margin-right: 20%;
+    background-color: #f48c06;
+    color: #fefefe;
+    border-radius: 15px;
+    border: none;
+    font-family: avenir, sans-serif;
+    font-weight: bold;
+}
+
+button:hover {
+    transform: scale(1.1);
+}
+
+
+h2 {
+    font-family: avenir, sans-serif;
+    font-weight: bold;
+    color: #1F1F1F;
+    text-align: center;
+    padding-bottom: 4%;
+}
+
+main section {
+    width: 80vw;
+    margin-top: 3%;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+main section a {
+    color: #1b4332;
+
+}
