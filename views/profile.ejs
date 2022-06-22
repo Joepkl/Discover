@@ -20,22 +20,50 @@
     </header>
         <%- include('./partials/navigation.ejs') %>
         <main>
-          <h1> </h1>
-          <% if(data.length) { %>
+            <h1>Hoi, <%= name %></h1>
+        <article id="disc">
+            <h2> Opzoek naar jouw perfecte baan? </h2>
+            <p>
+                Doe de DISC-test om erachter te komen welke kwaliteiten en eigenschappen bij jou
+                passen, en vind zo de perfecte baan voor jou! Misschien ontdek jij een nieuwe
+                kant en carrière van jezelf!
+            </p>
+            <button id="discBtn">
+                <a href="/disc">Begin de DISC test!</a>
+            </button>
+        </article>
+        <article id='favorites'>
+        <h2>Jouw opgeslagen vacatures:</h2>
+        <% if(data.length) { %>
             <ul id="vacatures">
                 <% for(let i = 0; i < data.length; i++) { %>
                 <li class="vacatures-li">
-                    <h3> <%= data[i].title %> </h3>
+                    <h2> <%= data[i].title %> </h2>
+                    <p> <%= data[i].introduction %> </p>
                       <ul>
                           <li> <%= data[i].location %></li>
                           <li> <%= data[i].businessSectors %></li>
                       </ul>
-                      <p> <%= data[i].introduction %> </p>
+                      <p> <%= data[i].study %> </p>
+                      <h3>Kernwoorden</h3>
+                      <ul>
+                          <li><%= data[i].keyword1 %></li>
+                          <li><%= data[i].keyword2 %></li>
+                          <li><%= data[i].keyword3 %></li>
+                      </ul>
                     <button><a href="/<%= data[i].id %>"> Meer lezen...</a></button>
                 </li>
                 <% } %>
             </ul>
-        <% } %>
+        <% } else { %>
+            <p>
+                Je hebt momenteel nog geen vacatures opgeslagen. Doe de DISC test of
+                zoek zelf naar jouw perfecte baan!
+            </p>
+            <a href="/">Browse vacatures</a>
+            <% } %>
+        </article>
+
     </main>
 
     <%- include('./partials/foot') %>

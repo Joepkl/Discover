@@ -39,7 +39,15 @@ const jobOfferSchema = new Schema({
         type: String,
         required: false
     },
-    keywords: {
+    keyword1: {
+        type: String,
+        required: false
+    },
+    keyword2: {
+        type: String,
+        required: false
+    },
+    keyword3: {
         type: String,
         required: false
     }

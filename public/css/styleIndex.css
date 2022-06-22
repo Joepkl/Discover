@@ -87,6 +87,10 @@ main form {
     margin-right: auto;
 }
 
+.vacatures-li {
+    background-color: #fefefe;
+}
+
 main form input {
     width: 100%;
     height: 30px;
@@ -144,4 +148,51 @@ main form input::placeholder {
 a {
     text-decoration: none;
     color: #fefefe;
+}
+
+#disc h2 {
+    margin-left: 0;
+}
+
+#disc {
+    background-color: rgb(233, 213, 192);
+    padding: 20px;
+    width: 80vw;
+    margin-left: auto;
+    margin-right: auto;
+    margin-bottom: 5%;
+}
+
+#favorites h2  {
+    margin-left: 0;
+}
+
+#favorites {
+    background-color: rgb(233, 213, 192);
+    padding: 20px;
+    width: 80vw;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+#favorites a {
+    text-decoration: underline #2b9348 ;
+    color: #2b9348;
+}
+
+#discBtn {
+    margin-top: 3%;
+    margin-bottom: 3%;
+    background-color: #f77f00;
+    padding-left: 20px;
+    padding-right: 20px;
+    padding-top: 10px;
+    padding-bottom: 10px;
+    border: none;
+    border-radius: 15px;
+    font-family: open-sans, sans-serif;
+}
+
+#discBtn:hover {
+    transform: scale(0.9);
 }

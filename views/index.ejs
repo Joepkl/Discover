@@ -42,7 +42,11 @@
                       </ul>
                       <p> <%= data[i].study %> </p>
                       <h3>Kernwoorden</h3>
-                      <p><%= data[i].keywords %></p>
+                      <ul>
+                          <li><%= data[i].keyword1 %></li>
+                          <li><%= data[i].keyword2 %></li>
+                          <li><%= data[i].keyword3 %></li>
+                      </ul>
                     <button><a href="/<%= data[i].id %>"> Meer lezen...</a></button>
                 </li>
                 <% } %>

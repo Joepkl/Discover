@@ -68,3 +68,12 @@ h1 {
 a {
     text-decoration: none;
 }
+
+form {
+    display: flex;
+    flex-direction: column;
+}
+
+form section {
+    margin: 2%;
+}

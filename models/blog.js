@@ -21,8 +21,20 @@ const blogSchema = new Schema({
         type: [String],
         required: false
     },
-    discResult: {
-        type: [Number],
+    dominant: {
+        type: Number,
+        required: false
+    },
+    interactive: {
+        type: Number,
+        required: false
+    },
+    stable: {
+        type: Number,
+        required: false
+    },
+    conscientious: {
+        type: Number,
         required: false
     }
 }, { timestamps: true });

@@ -19,6 +19,93 @@
         </svg>           
     </header>
     <%- include('./partials/navigation.ejs') %>
-    
+    <main>
+        <h1>Persoonlijkheidstest</h1>
+        <p>Vul alle vragen in om een beeld te vormen van jouw karaktereigenschappen.</p>
+        <form action="/disc" method="POST" enctype="application/x-www-form-urlencoded" required>
 
+            <section>
+                <h2>Ben jij direct of indirect?</h2>
+                <input type="radio" name="intro1" class="dominant interactief" value="direct" required><span>Direct</span>
+                <input type="radio" name="intro1" class="conscientieus stabiel" value="indirect"><span>Indirect</span>
+            </section>
+
+            <section>
+                <h2>Ben jij taakgericht of mensgericht?</h2>
+                <input type="radio" name="intro2" class="stabiel interactief" value="mensgericht" required><span>Mensgericht</span>
+                <input type="radio" name="intro2" class="conscientieus dominant" value="taakgericht"><span>Taakgericht</span>
+            </section>
+
+            <section>
+                <h2>Geef aan wat het beste bij jou past</h2>
+                <input type="radio" name="vraag1"  class="dominant" id="dominant" value="dominant" ><span>Direct</span>
+                <input type="radio" name="vraag1"  class="interactive" id="interactive" value="interactive" ><span>Spraakzaam</span>
+                <input type="radio" name="vraag1"  class="stable" id="stable" value="stable" ><span>Harmonieus</span>
+                <input type="radio" name="vraag1"  class="conscientieus" id="conscientieus" value="conscientieus" ><span>Analytisch</span>
+            </section>
+
+            <section>
+                <h2>Geef aan wat het beste bij jou past</h2>
+                <input type="radio" name="vraag2"  class="dominant" id="dominant" value="dominant" ><span>Besluitvaardig</span>
+                <input type="radio" name="vraag2"  class="interactive" id="interactive" value="interactive" ><span>Enthousiast</span>
+                <input type="radio" name="vraag2"  class="stable" id="stable" value="stable" ><span>Samen werken</span>
+                <input type="radio" name="vraag2"  class="conscientieus" id="conscientieus" value="conscientieus" ><span>Bedachtzaam</span>
+            </section>
+
+            <section>
+                <h2>Geef aan wat het beste bij jou past</h2>
+                <input type="radio" name="vraag3"  class="dominant" value="dominant" required><span>Gericht op uitdagingen</span>
+                <input type="radio" name="vraag3"  class="interactief" value="interactive"><span>Praat graag</span>
+                <input type="radio" name="vraag3"  class="stabiel" value="stable"><span>Stabiel</span>
+                <input type="radio" name="vraag3"  class="conscientieus" value="conscientieus"><span>Rationeel</span>
+            </section>
+
+            <section>
+                <h2>Geef aan wat het beste bij jou past</h2>
+                <input type="radio" name="vraag4"  class="dominant" value="dominant" required><span>Vastbesloten</span>
+                <input type="radio" name="vraag4"  class="interactief" value="interactive"><span>Inspirerend</span>
+                <input type="radio" name="vraag4"  class="stabiel" value="stable"><span>Stabiel</span>
+                <input type="radio" name="vraag4"  class="conscientieus" value="conscientieus"><span>Perfectie</span>
+            </section>
+
+            <section>
+                <h2>Geef aan wat het beste bij jou past</h2>
+                <input type="radio" name="karakter5"  class="dominant" value="dominant" required><span>Vol zelfvertrouwen</span>
+                <input type="radio" name="karakter5"  class="interactief" value="interactive"><span>Vriendelijk</span>
+                <input type="radio" name="karakter5"  class="stabiel" value="stable"><span>Gedisciplineerd</span>
+                <input type="radio" name="karakter5"  class="conscientieus" value="conscientieus"><span>Levendig</span>
+            </section>
+           
+            <section>
+                <h2>Geef aan wat het beste bij jou past</h2>
+                <input type="radio" name="karakter6"  class="dominant" value="dominant" required><span>Resultaatgericht</span>
+                <input type="radio" name="karakter6"  class="interactief" value="interactive"><span>Inspirerend</span>
+                <input type="radio" name="karakter6"  class="stabiel" value="stable"><span>Coöperatief</span>
+                <input type="radio" name="karakter6"  class="conscientieus" value="conscientieus"><span>Zorgvuldig</span>
+            </section>
+
+            <section>
+                <h2>Geef aan wat het beste bij jou past</h2>
+                <input type="radio" name="karakter7"  class="dominant" value="dominant" required><span>Dominant</span>
+                <input type="radio" name="karakter7"  class="interactief" value="interactive"><span>Invloedrijk</span>
+                <input type="radio" name="karakter7"  class="stabiel" value="stable"><span>Meegaand en attent</span>
+                <input type="radio" name="karakter7"  class="conscientieus" value="conscientieus"><span>Consciëntieus</span>
+            </section>
+
+            <section>
+                <h2>Geef aan wat het beste bij jou past</h2>
+                <input type="radio" name="karakter8"  class="dominant" value="dominant" required><span>Assertief</span>
+                <input type="radio" name="karakter8"  class="interactief" value="interactive"><span>Gezellig</span>
+                <input type="radio" name="karakter8"  class="stabiel" value="stable"><span>Helpend en ondersteunend</span>
+                <input type="radio" name="karakter8"  class="conscientieus" value="conscientieus"><span>Feitelijk ingesteld</span>
+            </section>
+               
+            <input type="submit">
+        </form>
+       <p>
+         
+        
+       </p>
+    </main>
+    <!-- <script src="./javascript/script.js"></script> -->
     <%- include('./partials/foot') %>

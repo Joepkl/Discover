@@ -4,6 +4,7 @@ if(process.env.NODE_ENV !== 'production') {
 }
 
 const express = require('express');
+const bodyParser = require('body-parser'); 
 const app = express();
 const bcrypt = require('bcrypt');
 const passport = require('passport');
@@ -125,7 +126,9 @@ app.post('/developer', (req, res) => {
     profile: req.body.profile,
     workingConditions: req.body.workingConditions,
     study: req.body.study,
-    keywords: req.body.keywords
+    keyword1: req.body.keyword1,
+    keyword2: req.body.keyword2,
+    keyword3: req.body.keyword3
   });
 
   offer.save()
@@ -170,7 +173,8 @@ app.get('/profile', checkAuthenticated, async (req, res, next) => {
     Promise.all(allResults).then(data => {
       console.log(allResults)
       res.render('profile', {
-        data: data
+        data: data,
+        name: req.user.name
       })
     })
     
@@ -178,15 +182,147 @@ app.get('/profile', checkAuthenticated, async (req, res, next) => {
   .catch((err) => {
     // console.log(err);
   })
-}) 
-
-
- 
-
-
+})
 
 app.get('/disc', (req, res) => {
   res.render('disc')
+})
+
+app.post('/disc', checkAuthenticated, (req, res) => {
+  //declaring the point system
+  let dpoints = 0;
+  let ipoints = 0;
+  let spoints = 0;
+  let cpoints = 0;
+
+  const intro1 = req.body.intro1;
+  if(intro1 === 'direct') {
+    dpoints++;
+    ipoints++
+  } else if(intro1 === 'indirect') {
+    spoints++;
+    cpoints++;
+  }
+
+  const intro2 = req.body.intro2;
+  if(intro1 === 'mensgericht') {
+    dpoints++;
+    ipoints++
+  } else if(intro2 === 'taakgericht') {
+    spoints++;
+    cpoints++;
+  }
+  
+
+  const question1 = req.body.vraag1;
+  if(question1 === 'dominant') {
+    dpoints++
+  } else if(question1 === 'interactive') {
+    ipoints++
+  } else if(question1 === 'stable') {
+    spoints++
+  } else if(question1 === 'conscientieus') {
+    cpoints++
+  }
+
+  const question2 = req.body.vraag2;
+  if(question2 === 'dominant') {
+    dpoints++
+  } else if(question2 === 'interactive') {
+    ipoints++
+  } else if(question2 === 'stable') {
+    spoints++
+  } else if(question2 === 'conscientieus') {
+    cpoints++
+  }
+
+  const question3 = req.body.vraag3;
+  if(question3 === 'dominant') {
+    dpoints++
+  } else if(question3 === 'interactive') {
+    ipoints++
+  } else if(question3 === 'stable') {
+    spoints++
+  } else if(question3 === 'conscientieus') {
+    cpoints++
+  }
+
+  const question4 = req.body.vraag3;
+  if(question4 === 'dominant') {
+    dpoints++
+  } else if(question4 === 'interactive') {
+    ipoints++
+  } else if(question4 === 'stable') {
+    spoints++
+  } else if(question4 === 'conscientieus') {
+    cpoints++
+  }
+
+  const question5 = req.body.karakter5;
+  if(question5 === 'dominant') {
+    dpoints++
+  } else if(question5 === 'interactive') {
+    ipoints++
+  } else if(question5 === 'stable') {
+    spoints++
+  } else if(question5 === 'conscientieus') {
+    cpoints++
+  }
+
+  const question6 = req.body.karakter6;
+  if(question6 === 'dominant') {
+    dpoints++
+  } else if(question6 === 'interactive') {
+    ipoints++
+  } else if(question6 === 'stable') {
+    spoints++
+  } else if(question6 === 'conscientieus') {
+    cpoints++
+  }
+
+  const question7 = req.body.karakter7;
+  if(question7 === 'dominant') {
+    dpoints++
+  } else if(question7 === 'interactive') {
+    ipoints++
+  } else if(question7 === 'stable') {
+    spoints++
+  } else if(question7 === 'conscientieus') {
+    cpoints++
+  }
+
+  const question8 = req.body.karakter8;
+  if(question8 === 'dominant') {
+    dpoints++
+  } else if(question8 === 'interactive') {
+    ipoints++
+  } else if(question8 === 'stable') {
+    spoints++
+  } else if(question8 === 'conscientieus') {
+    cpoints++
+  }
+
+  console.log('d points:' + dpoints)
+  console.log('i points:' + ipoints)
+  console.log('s points:' + spoints)
+  console.log('c points:' + cpoints)
+  
+  const user = req.user.id;
+  
+  Blog.findOneAndUpdate({
+    _id: user
+  }, {
+    $push: {
+      dominant: dpoints,
+      interactive: ipoints,
+      stable: spoints,
+      conscientious: cpoints
+    }
+  })
+  .then((result) => {
+    console.log(result)
+    res.render('disc');
+  })
 })
 
 app.get('/:id', (req, res) => {
