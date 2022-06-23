@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="css/login.css">
     <link rel="icon" href="./public/images/logo.png">
     <title>Login</title>
 </head>
@@ -19,26 +19,27 @@
           </svg>   
     </header>
     <main id="login-main">
-     <% if(messages.error) { %>
-        <%= messages.error %>
-        <% } %>
-        <h2>Log in met jouw account</h2>
-        <form id="inlog-form" action="/login" method="POST">
-            <div>
-                <label for="email">E-mail</label>
-                <input type="email" id="email" name="email" required>
-            </div>
-            <div>
-                <label for="password">Wachtwoord</label>
-                <input type="password" id="password" name="password" required>
-            </div>
-            <div class="submit">
-                <button id="login-submit" type="submit">Inloggen</button>
-            </div>
-        </form>
-        <section id="inlog-aanmelden">
-            <p>Nog geen account?</p>
-            <a href="/register">Account aanmaken</a>
-        </section>
-    </main>
+        <% if(messages.error) { %>
+           <%= messages.error %>
+           <% } %>
+           <h1>Login met jouw account</h1>
+           <form id="inlog-form" action="/login" method="POST">
+               <div>
+                   <label for="email" id="input1">E-mail</label>
+                   <input type="email" id="email" name="email" placeholder="Vul hier jouw email in" required>
+               </div>
+               <div>
+                   <label for="password">Wachtwoord</label>
+                   <input type="password" id="password" name="password" placeholder="Vul hier jouw wachtwoord in" required>
+               </div>
+               <div class="submit">
+                   <button id="login-submit" type="submit">Inloggen</button>
+               </div>
+           </form>
+           <section id="inlog-aanmelden">
+               <p>Nog geen account?</p>
+               <a href="/register">Account aanmaken</a>
+           </section>
+       </main>
+
     <%- include('./partials/foot') %>

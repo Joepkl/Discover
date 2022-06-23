@@ -69,6 +69,16 @@ app.get('/', checkAuthenticated, async (req, res, next) => {
     })
 })
 
+app.post('/', checkAuthenticated, async (req, res) => {
+  const input = req.body.search;
+  console.log(input);
+  let search = await Offers.find({title: {$regex: new RegExp('^' + input + '.*', 'i')}}).exec()
+   .then(response => {
+     console.log(response)
+     res.render('index', {data: response, name: req.user.name})
+   })
+})
+
 app.get('/login', checkNotAuthenticated, (req, res) => {
   res.render('login')
 })
@@ -118,14 +128,25 @@ app.post('/developer', (req, res) => {
 
   const offer = new Offers({
     title: req.body.title,
+
     location: req.body.location,
+
     businessSectors: req.body.businessSectors,
+
     introduction: req.body.introduction,
+
     description: req.body.description,
+
     responsibilities: req.body.responsibilities,
+
     profile: req.body.profile,
+
     workingConditions: req.body.workingConditions,
+
     study: req.body.study,
+
+    score: req.body.score,
+    
     keyword1: req.body.keyword1,
     keyword2: req.body.keyword2,
     keyword3: req.body.keyword3
@@ -162,7 +183,7 @@ function checkNotAuthenticated(req, res, next) {
 }
 
 // FIXEN!!!!
-app.get('/profile', checkAuthenticated, async (req, res, next) => {
+app.get('/profile', checkAuthenticated, (req, res, next) => {
   const user = req.user.id;
   Blog.findById(user).then(results => {
 
@@ -171,7 +192,7 @@ app.get('/profile', checkAuthenticated, async (req, res, next) => {
     });
 
     Promise.all(allResults).then(data => {
-      console.log(allResults)
+      // console.log(allResults)
       res.render('profile', {
         data: data,
         name: req.user.name
@@ -183,6 +204,19 @@ app.get('/profile', checkAuthenticated, async (req, res, next) => {
     // console.log(err);
   })
 })
+
+app.post('/profile', checkAuthenticated, async (req, res) => {
+  const user = req.user.id;
+  const objectId = req.body.delete;
+  
+  await Blog.findByIdAndUpdate(user, {
+    $pull: {
+      favorites: objectId
+    }
+  })
+  res.redirect('profile')
+})
+
 
 app.get('/disc', (req, res) => {
   res.render('disc')
@@ -307,6 +341,37 @@ app.post('/disc', checkAuthenticated, (req, res) => {
   console.log('s points:' + spoints)
   console.log('c points:' + cpoints)
   
+  if(dpoints > ipoints ||  dpoints > spoints || dpoints > cpoints) {
+      Offers.find({score: "dominant"})
+      .then((dombo) => {
+        console.log(dombo)
+        res.render('results', {data: dombo})
+      })
+    }
+      else if(ipoints > dpoints ||  ipoints > spoints || ipoints > cpoints) {
+        Offers.find({score: "interactief"})
+        .then(dombo => {
+          console.log(dombo)
+          res.render('results', {data: dombo})
+        })
+        } else if(spoints > dpoints ||  ipoints > spoints || cpoints > cpoints){
+          Offers.find({score: "stabiel"})
+          .then(dombo => {
+            console.log(dombo)
+            res.render('results', {data: dombo})
+          })
+        } else if(cpoints > dpoints ||  ipoints > spoints || spoints > cpoints) {
+            Offers.find({score: "conscientieus"})
+            .then(dombo => {
+              console.log(dombo)
+              res.render('results', {data: dombo})
+            })
+  }
+
+  app.get('/results', (req, res) => {
+    res.render('results');
+  })
+
   const user = req.user.id;
   
   Blog.findOneAndUpdate({
@@ -321,7 +386,6 @@ app.post('/disc', checkAuthenticated, (req, res) => {
   })
   .then((result) => {
     console.log(result)
-    res.render('disc');
   })
 })
 

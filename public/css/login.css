@@ -9,7 +9,7 @@ body{
 }
 
 main{
-    width: 320px;
+    width: 40vw;
     margin: 0 auto;
 }
 
@@ -26,7 +26,7 @@ button{
     cursor: pointer;
     margin-top: 10px;
     color: white;
-    width: 155px;
+    width: 80px;
     margin-top: 20px;
     margin-bottom: 30px;
 }
@@ -56,10 +56,10 @@ div{
 
 input{
     width: 300px;
-    min-width: 170px;
     padding: 5px;
     border-radius: 10px;
     border: black solid 2px;
+    min-width: 170px;
 }
 
 label{

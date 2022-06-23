@@ -4,66 +4,74 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="css/styleIndex.css">
+    <link rel="stylesheet" href="css/profileStyle.css">
     <link rel="icon" href="./public/images/logo.png"> 
     <title>Document</title>
 </head>
 <body>
-    <header id="index-header">
-        <svg xmlns="http://www.w3.org/2000/svg" width="257" height="58" viewBox="0 0 257 58">
-            <g id="Group_1" data-name="Group 1" transform="translate(-1037 -791)">
-              <path id="Path_1" data-name="Path 1" d="M29,0A29,29,0,1,1,0,29,29,29,0,0,1,29,0Z" transform="translate(1037 791)" fill="#2d6a4f"/>
-              <path id="Icon_map-health" data-name="Icon map-health" d="M28.53,9.99a.581.581,0,0,0-.579-.579H20.419a.581.581,0,0,1-.579-.579V1.3A.581.581,0,0,0,19.26.72H9.99a.581.581,0,0,0-.579.579V8.831a.581.581,0,0,1-.579.579H1.3A.581.581,0,0,0,.72,9.99v9.27a.581.581,0,0,0,.579.579H8.831a.581.581,0,0,1,.579.579v7.532a.581.581,0,0,0,.579.579h9.27a.581.581,0,0,0,.579-.579V20.419a.581.581,0,0,1,.579-.579h7.532a.581.581,0,0,0,.579-.579Z" transform="translate(1051.375 805.375)" fill="#fefefe"/>
-              <text id="DISCOVER" transform="translate(1102 832)" fill="#1f1f1f" font-size="35" font-family="Montserrat-Bold, Montserrat" font-weight="700"><tspan x="0" y="0">DISCOVER</tspan></text>
-            </g>
-        </svg>           
-    </header>
+
         <%- include('./partials/navigation.ejs') %>
         <main>
-            <h1>Hoi, <%= name %></h1>
-        <article id="disc">
-            <h2> Opzoek naar jouw perfecte baan? </h2>
-            <p>
-                Doe de DISC-test om erachter te komen welke kwaliteiten en eigenschappen bij jou
-                passen, en vind zo de perfecte baan voor jou! Misschien ontdek jij een nieuwe
-                kant en carrière van jezelf!
-            </p>
-            <button id="discBtn">
-                <a href="/disc">Begin de DISC test!</a>
-            </button>
-        </article>
-        <article id='favorites'>
-        <h2>Jouw opgeslagen vacatures:</h2>
-        <% if(data.length) { %>
-            <ul id="vacatures">
-                <% for(let i = 0; i < data.length; i++) { %>
-                <li class="vacatures-li">
-                    <h2> <%= data[i].title %> </h2>
-                    <p> <%= data[i].introduction %> </p>
-                      <ul>
-                          <li> <%= data[i].location %></li>
-                          <li> <%= data[i].businessSectors %></li>
-                      </ul>
-                      <p> <%= data[i].study %> </p>
-                      <h3>Kernwoorden</h3>
-                      <ul>
-                          <li><%= data[i].keyword1 %></li>
-                          <li><%= data[i].keyword2 %></li>
-                          <li><%= data[i].keyword3 %></li>
-                      </ul>
-                    <button><a href="/<%= data[i].id %>"> Meer lezen...</a></button>
-                </li>
+            <main>
+                <div>
+                    <h1>Hoi, <%= name %></h1>
+                    <article id="disc">
+                        <h2> Opzoek naar jouw perfecte baan? </h2>
+                        <p>
+                            Doe de DISC-test om erachter te komen welke kwaliteiten en eigenschappen bij jou
+                            passen, en vind zo de perfecte baan voor jou! Misschien ontdek jij een nieuwe
+                            kant en carrière van jezelf!
+                        </p>
+                        <button id="discBtn">
+                            <a href="/disc">Begin de DISC test</a>
+                        </button>
+                </div>
+                    </article>
+    
+            <article id='favorites'>
+            <div>
+                <h2>Jouw opgeslagen vacatures:</h2>
+            </div>   
+            <% if(data.length) { %>
+                <ul id="vacatures">
+                    <% for(let i = 0; i < data.length; i++) { %>
+                    <section>
+                        <li class="vacatures-li">
+                            <h2> <%= data[i].title %> </h2>
+                            <p> <%= data[i].introduction %> </p>
+                              <ul>
+                                  <li> <%= data[i].location %></li>
+                                  <li> <%= data[i].businessSectors %></li>
+                              </ul>
+                              <p> <%= data[i].study %> </p>
+                              <h3>Kernwoorden</h3>
+                              <ul>
+                                  <li><%= data[i].keyword1 %></li>
+                                  <li><%= data[i].keyword2 %></li>
+                                  <li><%= data[i].keyword3 %></li>
+                              </ul>
+                              <form method="POST" action="/profile">
+                                  <button name="delete" type="submit" value="<%= data[i].id %>">
+                                    <svg xmlns="http://www.w3.org/2000/svg" width="30.849" height="30.848" viewBox="0 0 30.849 30.848">
+                                        <path id="Icon_metro-cross" data-name="Icon metro-cross" d="M33.138,26.711h0l-9.358-9.358,9.358-9.358h0a.966.966,0,0,0,0-1.363L28.717,2.21a.967.967,0,0,0-1.363,0h0L18,11.568,8.637,2.21h0a.966.966,0,0,0-1.363,0L2.852,6.631a.966.966,0,0,0,0,1.363h0l9.358,9.358L2.852,26.711h0a.966.966,0,0,0,0,1.363l4.421,4.421a.966.966,0,0,0,1.363,0h0L18,23.136l9.358,9.358h0a.966.966,0,0,0,1.363,0l4.421-4.421a.966.966,0,0,0,0-1.363Z" transform="translate(-2.571 -1.928)" fill="#fa3333"/>
+                                      </svg>                                      
+                                  </button>
+                              </form>
+                            <button><a href="<%= data[i].id %>"> Meer lezen...</a></button>
+                        </li>
+                    </section>
+                    <% } %>
+                </ul>
+            <% } else { %>
+                <p id="geen-resultaat">
+                    Je hebt momenteel nog geen vacatures opgeslagen. Doe de DISC test of
+                    zoek zelf naar jouw perfecte baan!
+                    <a href="/">Browse vacatures</a>
+                </p>
+                
                 <% } %>
-            </ul>
-        <% } else { %>
-            <p>
-                Je hebt momenteel nog geen vacatures opgeslagen. Doe de DISC test of
-                zoek zelf naar jouw perfecte baan!
-            </p>
-            <a href="/">Browse vacatures</a>
-            <% } %>
-        </article>
-
-    </main>
+            </article>
+           
+        </main>
 
     <%- include('./partials/foot') %>
