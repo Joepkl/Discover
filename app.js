@@ -13,6 +13,7 @@ const session = require('express-session');
 const methodOverride = require('method-override');
 const path = require('path');
 
+const port = process.env.PORT || 3500;
 
 //CONNECTION TO MONGODB DATABASE  
 const mongoose = require('mongoose');
@@ -21,7 +22,7 @@ const Blog = require('./models/blog.js');
 const dbURI = 'mongodb+srv://developer1:test1234@vacaturebank.oyxfpmr.mongodb.net/VacaturebankData?retryWrites=true&w=majority';
 
 mongoose.connect(dbURI, { useNewUrlParser: true, useUnifiedTopology: true })
-  .then((result) => app.listen(3500), console.log('Mongodb connected'))
+  .then((result) => app.listen(port), console.log('Mongodb connected'))
   .catch((error) => console.log(error + 'has occured'))
 
 const initializePassport = require('./passport-config.js');
@@ -32,7 +33,7 @@ initializePassport(
   id => users.find(user => user.id === id)
 );
 
-const port = process.env.PORT || 3500;
+
 
 
 //View engine
