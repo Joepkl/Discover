@@ -353,5 +353,188 @@ app.post('/profile', checkAuthenticated, async (req, res) => {
 ````
 Door middel van de $pull methode kan specifieke content uit de favorites worden gehaald 
 
+### Opslaan van resultaten DISC test
+Een van de hoofdfunctionaliteiten is het invullen van de DISC test. Deze data moet gekoppeld worden aan het user account.
+````
+app.post('/disc', checkAuthenticated, (req, res) => {
+  //declaring the point system
+  let dpoints = 0;
+  let ipoints = 0;
+  let spoints = 0;
+  let cpoints = 0;
+
+  const intro1 = req.body.intro1;
+  if(intro1 === 'direct') {
+    dpoints++;
+    ipoints++
+  } else if(intro1 === 'indirect') {
+    spoints++;
+    cpoints++;
+  }
+
+  const intro2 = req.body.intro2;
+  if(intro1 === 'mensgericht') {
+    dpoints++;
+    ipoints++
+  } else if(intro2 === 'taakgericht') {
+    spoints++;
+    cpoints++;
+  }
+  const question1 = req.body.vraag1;
+  if(question1 === 'dominant') {
+    dpoints++
+  } else if(question1 === 'interactive') {
+    ipoints++
+  } else if(question1 === 'stable') {
+    spoints++
+  } else if(question1 === 'conscientieus') {
+    cpoints++
+  }
+
+  const question2 = req.body.vraag2;
+  if(question2 === 'dominant') {
+    dpoints++
+  } else if(question2 === 'interactive') {
+    ipoints++
+  } else if(question2 === 'stable') {
+    spoints++
+  } else if(question2 === 'conscientieus') {
+    cpoints++
+  }
+
+  const question3 = req.body.vraag3;
+  if(question3 === 'dominant') {
+    dpoints++
+  } else if(question3 === 'interactive') {
+    ipoints++
+  } else if(question3 === 'stable') {
+    spoints++
+  } else if(question3 === 'conscientieus') {
+    cpoints++
+  }
+
+  const question4 = req.body.vraag3;
+  if(question4 === 'dominant') {
+    dpoints++
+  } else if(question4 === 'interactive') {
+    ipoints++
+  } else if(question4 === 'stable') {
+    spoints++
+  } else if(question4 === 'conscientieus') {
+    cpoints++
+  }
+
+  const question5 = req.body.karakter5;
+  if(question5 === 'dominant') {
+    dpoints++
+  } else if(question5 === 'interactive') {
+    ipoints++
+  } else if(question5 === 'stable') {
+    spoints++
+  } else if(question5 === 'conscientieus') {
+    cpoints++
+  }
+
+  const question6 = req.body.karakter6;
+  if(question6 === 'dominant') {
+    dpoints++
+  } else if(question6 === 'interactive') {
+    ipoints++
+  } else if(question6 === 'stable') {
+    spoints++
+  } else if(question6 === 'conscientieus') {
+    cpoints++
+  }
+
+  const question7 = req.body.karakter7;
+  if(question7 === 'dominant') {
+    dpoints++
+  } else if(question7 === 'interactive') {
+    ipoints++
+  } else if(question7 === 'stable') {
+    spoints++
+  } else if(question7 === 'conscientieus') {
+    cpoints++
+  }
+
+  const question8 = req.body.karakter8;
+  if(question8 === 'dominant') {
+    dpoints++
+  } else if(question8 === 'interactive') {
+    ipoints++
+  } else if(question8 === 'stable') {
+    spoints++
+  } else if(question8 === 'conscientieus') {
+    cpoints++
+  }
+
+  console.log('d points:' + dpoints)
+  console.log('i points:' + ipoints)
+  console.log('s points:' + spoints)
+  console.log('c points:' + cpoints)
+  
+  if(dpoints > ipoints ||  dpoints > spoints || dpoints > cpoints) {
+      Offers.find({score: "dominant"})
+      .then((dombo) => {
+        console.log(dombo)
+        res.render('results', {data: dombo})
+      })
+    }
+      else if(ipoints > dpoints ||  ipoints > spoints || ipoints > cpoints) {
+        Offers.find({score: "interactief"})
+        .then(dombo => {
+          console.log(dombo)
+          res.render('results', {data: dombo})
+        })
+        } else if(spoints > dpoints ||  ipoints > spoints || cpoints > cpoints){
+          Offers.find({score: "stabiel"})
+          .then(dombo => {
+            console.log(dombo)
+            res.render('results', {data: dombo})
+          })
+        } else if(cpoints > dpoints ||  ipoints > spoints || spoints > cpoints) {
+            Offers.find({score: "conscientieus"})
+            .then(dombo => {
+              console.log(dombo)
+              res.render('results', {data: dombo})
+            })
+  }
+  ````
+Elke radiobutton heeft bij elke vraag een verschillende value. Deze kan dominant, interactief, stabiel of conscientieus zijn. Bij de submit 
+van het formulier worden al deze waarden opgeslagen bij het juiste kernwoord. Door een if statement wordt elk woord gecontroleerd om te kijken
+of de score het hoogst is. Als dit zo is, dan worden de vacatures opgehaald die als score hetzelfde woord als de uitslag hebben. Deze vacatures worden op de /results pagina gerenderd.
+````
+      <div class="containerVacatures">
+            <ul id="vacatures">
+                <% for(let i = 0; i < data.length; i++) { %>
+                <section>
+                    <li class="vacatures-li">
+                        <h2> <%= data[i].title %> </h2>
+                        <p> <%= data[i].introduction %> </p>
+                          <ul>
+                              <li> <%= data[i].location %></li>
+                              <li> <%= data[i].businessSectors %></li>
+                          </ul>
+                          <p> <%= data[i].study %> </p>
+                          <h3>Kernwoorden</h3>
+                          <ul>
+                              <li><%= data[i].keyword1 %></li>
+                              <li><%= data[i].keyword2 %></li>
+                              <li><%= data[i].keyword3 %></li>
+                          </ul>
+                        <button><a href="/<%= data[i].id %>"> Meer lezen...</a></button>
+                    </li>
+                </section>
+            </ul>
+                <% } %>
+ ````
+ Bij de resultspagina wordt ook een for loop gebruikt om de juiste content te laden.
 
 ## Wishlist
+Wij hadden nog redelijk veel op de wish list staan. We hebben echter in de laatste weken zeer grote stapppen kunnen zetten.
+Dit hadden we nog wél willen toevoegen:
+* Carriere roadmap
+* Omscholingsopties bij vacatures
+* Linken aan een Linkedin profiel
+
+Echter zijn als onze kern functionaliteiten ontwikkeld en is de opdrachtgever ook tevreden met wij hebben geleverd.
