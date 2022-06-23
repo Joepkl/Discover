@@ -39,6 +39,10 @@ const jobOfferSchema = new Schema({
         type: String,
         required: false
     },
+    score: {
+        type: String,
+        required: true
+    },
     keyword1: {
         type: String,
         required: false

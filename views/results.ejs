@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="css/index.css">
+    <link rel="icon" href="./public/images/logo.png"> 
+    <title>Document</title>
+</head>
+<body>
+    <%- include('./partials/navigation.ejs') %>
+    <main>
+    <h2 id="titelV">Vacatures op basis van jouw DISC resultaten</h2>
+        <div class="containerVacatures">
+            <ul id="vacatures">
+                <% for(let i = 0; i < data.length; i++) { %>
+                <section>
+                    <li class="vacatures-li">
+                        <h2> <%= data[i].title %> </h2>
+                        <p> <%= data[i].introduction %> </p>
+                          <ul>
+                              <li> <%= data[i].location %></li>
+                              <li> <%= data[i].businessSectors %></li>
+                          </ul>
+                          <p> <%= data[i].study %> </p>
+                          <h3>Kernwoorden</h3>
+                          <ul>
+                              <li><%= data[i].keyword1 %></li>
+                              <li><%= data[i].keyword2 %></li>
+                              <li><%= data[i].keyword3 %></li>
+                          </ul>
+                        <button><a href="/<%= data[i].id %>"> Meer lezen...</a></button>
+                    </li>
+                </section>
+            </ul>
+                <% } %>
+        </main>
+</body>
