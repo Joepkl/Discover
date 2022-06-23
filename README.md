@@ -26,7 +26,6 @@ interactie tussen de client en server side is zodat de pagina relatief snel zal 
 * Zoekfunctie
 * DISC Persoonlijkheidstest
 * Vacatures aan de hand van DISC resultaten
-* Detailpagina per vacature
 * Vacature toevoegen aan favoriete
 
 ## Activity diagram
@@ -136,7 +135,105 @@ module.exports = function(passport) {
 Allereerst wordt het email gecontroleerd. Als dit voltooid is, dan zal het wachtwoord worden vergeleken door middel van bcrypt. Als
 deze functie voltooid is, dan zal in de app.post de gebruiker worden doorverwezen naar de juiste pagina. Bij succes de indexpagina.
 
-## Renderen van vacatures op de index pagina
+### Renderen van vacatures op de index pagina
+De eerste functionaliteit die er is na he succesvol inloggen is dat alle vacatures uit de database worden opgehaald. Deze worden allemaal
+op de index pagina gerenderd door middel van ejs.
+
+#### Ophalen van vacatures
+````
+const Offers = require('./models/joboffers.js');
+
+app.get('/', checkAuthenticated, async (req, res, next) => {
+
+    Offers.find((err, docs) => {
+      if(!err) {
+        res.render('index', {
+          data: docs,
+          name: req.user.name
+        })
+      } else {
+        console.log('Failed to retrieve data')
+      }
+    })
+})
+````
+In de app.get van de index route wordt er een async functie uitgevoerd omdat we hier werken met data. Offers is de collectie waar alle
+vacatures in zijn te vinden. Omdat we alle vacatures willen renderen hebben we gebruik gemaakt van .find((err,docs) zodat alle documenten 
+en eventuele errors worden opgehaald. Het if statement zorgt er voor dat als er geen error uitkomt dat dan de index pagina moet worden gerenderd. 
+Bij het renderen geven wij een object mee die de vacatures meegeeft aan data, en de gebruikersnaam aan name. De checkAuthenticated functie
+zorgt ervoor dat je de naam van de gebruiker kan ophalen.
+
+#### Renderen van de indexpagina
+````
+  <% if(data.length) { %>
+         <div class="containerVacatures">
+             <ul id="vacatures">
+                 <% for(let i = 0; i < data.length; i++) { %>
+                 <section>
+                     <li class="vacatures-li">
+                         <h2> <%= data[i].title %> </h2>
+                         <p> <%= data[i].introduction %> </p>
+                           <ul>
+                               <li> <%= data[i].location %></li>
+                               <li> <%= data[i].businessSectors %></li>
+                           </ul>
+                           <p> <%= data[i].study %> </p>
+                           <h3>Kernwoorden</h3>
+                           <ul>
+                               <li><%= data[i].keyword1 %></li>
+                               <li><%= data[i].keyword2 %></li>
+                               <li><%= data[i].keyword3 %></li>
+                           </ul>
+                         <button><a href="/<%= data[i].id %>"> Meer lezen...</a></button>
+                     </li>
+                 </section>
+                 <% } %>
+             </ul>
+             <% } else { %>
+                <p id="geen-resultaat">
+                    Wij hebben helaas geen vacature gevonden met deze zoekopdracht.
+                    Probeer het alsjeblieft opnieuw!
+                </p>
+                <% } %>
+   ````
+Bij het renderen hebben wij gebruikt gemaakt van ejs, zodat je gemakkelijk client side javascript in de html kan schrijven. Om alle vacatures te renderen moet er eerst met het if statement gekeken worden of de data er uberhaupt is. Dit werkt door middel van data.length. Als dit zo is dan 
+moet er door middel van een for loop door alle vacatures heen gelopen worden om deze een voor een doormiddel van [i] te renderen. Op deze pagina
+is een link die het objectId van de vacature bevat, wat ervoor zorgt dat je makkelijk kan doorverwijzen naar de detailpagina.
+
+### Zoekfunctie
+Naast het renderen van de vacatures moet de gebruiker ook de mogelijkheid krijgen om te zoeken naar vacatures. In de app.post wordt de
+value van de zoekbalk opgehaald door middel van body parser. Na het ophalen van de zoekopdracht wordt er door middel van Regex gezocht 
+in de Offers collectie naar een vergelijkende tekst. Regex maakt het mogelijk om eenvoudig een woord of een deel daarvan stap voor stap te vergelijken met data. Omdat dit een promise is wordt in de .then de response meegegeven. Na het voltooien van de zoekopdracht wordt de indexpagina opnieuw gerenderd waarbij een object wordt meegegeven met de resultaten van de zoekopdracht en de gebruikersnaam.
+
+### Vacature aan favorieten toevoegen
+Het moet voor de gebruiker mogelijk zijn om vacatures op te slaan, zodat deze later terug kunnen worden bekeken. Wij hebben dit gerealiseerd
+door een veld in het user data model toe te voegen die een array opslaat. In deze array kunnen de objectId's van de opgeslagen vacatures worden
+gepusht zodat deze later weer kunnen worden gerenderd.
+````
+app.post('/:id', checkAuthenticated, (req, res) => {
+  const user = req.user.id;
+  const offerId = req.params.id;
+  
+  Blog.findOneAndUpdate({
+    _id: user
+  }, {
+    $push: {
+      favorites: offerId
+    }
+  })
+  .then((result) => {
+    console.log(result)
+    res.redirect('profile')
+  })
+})
+````
+In de app.post van de detailpagina speciaal voor de juiste vacature wordt allereerst weer het user id opgevraagd. Daarna wordt het objectId 
+van de vacature opgevraagd door middel van req.params.id. Dit zorgt ervoor dat het id in de url wordt gepakt, wat weer gelijk staat aan
+het objectId van de vacature. Omdat we zoeken naar bestaande data hebben wij findOneAndUpdate gebruikt om zo data toe te voegen. Het is is gelijk
+gezet aan user en door middel van $push wordt het offerId aan het juiste user model toegevoegd. De gebruiker wordt doorverwezen naar de profiel pagina omdat daar de favoriete vacatures zichbaar zullen zijn.
+
+### Favorieten vacatures renderen
+
 
 
 ## Wishlist
