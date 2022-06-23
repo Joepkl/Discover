@@ -536,5 +536,7 @@ Dit hadden we nog wél willen toevoegen:
 * Carriere roadmap
 * Omscholingsopties bij vacatures
 * Linken aan een Linkedin profiel
+* Routes willen toevoegen voor meer overzichtelijkere code
 
 Echter zijn als onze kern functionaliteiten ontwikkeld en is de opdrachtgever ook tevreden met wij hebben geleverd.
+Het grootste doel voor volgende keer is het toevoegen van routes, om de code een stuk korter en overzichtelijker te houden.
