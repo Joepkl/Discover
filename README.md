@@ -204,6 +204,17 @@ is een link die het objectId van de vacature bevat, wat ervoor zorgt dat je makk
 Naast het renderen van de vacatures moet de gebruiker ook de mogelijkheid krijgen om te zoeken naar vacatures. In de app.post wordt de
 value van de zoekbalk opgehaald door middel van body parser. Na het ophalen van de zoekopdracht wordt er door middel van Regex gezocht 
 in de Offers collectie naar een vergelijkende tekst. Regex maakt het mogelijk om eenvoudig een woord of een deel daarvan stap voor stap te vergelijken met data. Omdat dit een promise is wordt in de .then de response meegegeven. Na het voltooien van de zoekopdracht wordt de indexpagina opnieuw gerenderd waarbij een object wordt meegegeven met de resultaten van de zoekopdracht en de gebruikersnaam.
+````
+app.post('/', checkAuthenticated, async (req, res) => {
+  const input = req.body.search;
+  console.log(input);
+  let search = await Offers.find({title: {$regex: new RegExp('^' + input + '.*', 'i')}}).exec()
+   .then(response => {
+     console.log(response)
+     res.render('index', {data: response, name: req.user.name})
+   })
+})
+````
 
 ### Vacature aan favorieten toevoegen
 Het moet voor de gebruiker mogelijk zijn om vacatures op te slaan, zodat deze later terug kunnen worden bekeken. Wij hebben dit gerealiseerd
@@ -233,7 +244,114 @@ het objectId van de vacature. Omdat we zoeken naar bestaande data hebben wij fin
 gezet aan user en door middel van $push wordt het offerId aan het juiste user model toegevoegd. De gebruiker wordt doorverwezen naar de profiel pagina omdat daar de favoriete vacatures zichbaar zullen zijn.
 
 ### Favorieten vacatures renderen
+Na het opslaan van de vacature willen we dat de vacature op de profiel pagina wordt gerenderd. Bij het rendern wordt hetzelfde format gebruikt 
+als in de index pagina. Op de profielpagina is ook de optie om de vacature weer uit de favorieten lijst te verwjideren.
+````
+app.get('/profile', checkAuthenticated, (req, res, next) => {
+  const user = req.user.id;
+  Blog.findById(user).then(results => {
 
+    const allResults = results.favorites.map(element => {
+      return Offers.findById(element).exec();
+    });
+
+    Promise.all(allResults).then(data => {
+      // console.log(allResults)
+      res.render('profile', {
+        data: data,
+        name: req.user.name
+      })
+    })
+    
+  })
+  .catch((err) => {
+    // console.log(err);
+  })
+})
+````
+Bij het renderen moet eerst de data weer worden opgehaald. Door middel van het user id wordt de juiste data gevonden. Omdat we alleen .favorites
+nodig hebben wordt er .map gebruikt en wordt door middel van .exec deze functie uitgevoerd en voltooid. Vervolgens wordt /profile gerenderd en wordt de data in een object meegegeven.
+
+````
+            <main>
+                <div>
+                    <h1>Hoi, <%= name %></h1>
+                    <article id="disc">
+                        <h2> Opzoek naar jouw perfecte baan? </h2>
+                        <p>
+                            Doe de DISC-test om erachter te komen welke kwaliteiten en eigenschappen bij jou
+                            passen, en vind zo de perfecte baan voor jou! Misschien ontdek jij een nieuwe
+                            kant en carrière van jezelf!
+                        </p>
+                        <button id="discBtn">
+                            <a href="/disc">Begin de DISC test</a>
+                        </button>
+                </div>
+                    </article>
+    
+            <article id='favorites'>
+            <div>
+                <h2>Jouw opgeslagen vacatures:</h2>
+            </div>   
+            <% if(data.length) { %>
+                <ul id="vacatures">
+                    <% for(let i = 0; i < data.length; i++) { %>
+                    <section>
+                        <li class="vacatures-li">
+                            <h2> <%= data[i].title %> </h2>
+                            <p> <%= data[i].introduction %> </p>
+                              <ul>
+                                  <li> <%= data[i].location %></li>
+                                  <li> <%= data[i].businessSectors %></li>
+                              </ul>
+                              <p> <%= data[i].study %> </p>
+                              <h3>Kernwoorden</h3>
+                              <ul>
+                                  <li><%= data[i].keyword1 %></li>
+                                  <li><%= data[i].keyword2 %></li>
+                                  <li><%= data[i].keyword3 %></li>
+                              </ul>
+                              <form method="POST" action="/profile">
+                                  <button name="delete" type="submit" value="<%= data[i].id %>">
+                                    <svg xmlns="http://www.w3.org/2000/svg" width="30.849" height="30.848" viewBox="0 0 30.849 30.848">
+                                      </svg>                                      
+                                  </button>
+                              </form>
+                            <button><a href="<%= data[i].id %>"> Meer lezen...</a></button>
+                        </li>
+                    </section>
+                    <% } %>
+                </ul>
+            <% } else { %>
+                <p id="geen-resultaat">
+                    Je hebt momenteel nog geen vacatures opgeslagen. Doe de DISC test of
+                    zoek zelf naar jouw perfecte baan!
+                    <a href="/">Browse vacatures</a>
+                </p>
+                
+                <% } %>
+            </article>
+````
+Bij het renderen van de data wordt er met een for loop per vacature de juiste data gerenderd. Bij dit format is er ook een svg die staat voor
+de delete functie. Deze heeft een value van het id van de vacature om dit later weer te verwijderen.
+
+### Verwijderen uit favorieten lijst
+De gebruiker moet ook de mogelijkheid hebben om de vacature uit de favorieten lijst te halen. Als de gebruiker op het verwijder icoon klikt zal
+de vacature worden verwijdert.
+````
+app.post('/profile', checkAuthenticated, async (req, res) => {
+  const user = req.user.id;
+  const objectId = req.body.delete;
+  
+  await Blog.findByIdAndUpdate(user, {
+    $pull: {
+      favorites: objectId
+    }
+  })
+  res.redirect('profile')
+})
+````
+Door middel van de $pull methode kan specifieke content uit de favorites worden gehaald 
 
 
 ## Wishlist
