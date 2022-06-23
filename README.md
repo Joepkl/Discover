@@ -29,6 +29,7 @@ interactie tussen de client en server side is zodat de pagina relatief snel zal 
 * Vacature toevoegen aan favoriete
 
 ## Activity diagram
+![activity](https://user-images.githubusercontent.com/70690100/175374882-807dbf99-9689-413b-8ce5-4d08c20317d3.png)
 
 ## Mongodb en Mongoose
 Om data op te slaan hebben wij voor het eerst met een database gewerkt. Hiervoor hebben wij de cloud based database Atlas van Mongodb gebruikt. Dit hebben wij gecombineerd met Mongoose, zodat er makkelijk gecommuniceerd kan worden tussen de server en de database. In dit kopje gaan we bespreken hoe we hier tot gekomen zijn.
