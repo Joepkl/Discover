@@ -30,6 +30,78 @@ interactie tussen de client en server side is zodat de pagina relatief snel zal 
 
 ## Activity diagram
 
+## Mongodb en Mongoose
+Om data op te slaan hebben wij voor het eerst met een database gewerkt. Hiervoor hebben wij de cloud based database Atlas van Mongodb gebruikt. Dit hebben wij gecombineerd met Mongoose, zodat er makkelijk gecommuniceerd kan worden tussen de server en de database. In dit kopje gaan we bespreken hoe we hier tot gekomen zijn.
+
+### Account en database maken op Mongodb
+Na het maken van een account kan je gelijk een gratis database aanmaken. Deze hoef je alleen een titel te geven en voila. In deze database kan
+je verschillende collecties aanmaken. Deze collecties kan je in een Javascript bestand meegeven hoe je ze gestructureerd wilt hebben en
+welke data er moet worden opgeslagen. Het is een good practice als de naam van de collectie een meervoud is van de Schema's die er later in komen te staan.
+<img width="1219" alt="Schermafbeelding 2022-06-23 om 19 39 42" src="https://user-images.githubusercontent.com/70690100/175360965-5a66e866-375b-48b5-909d-a933fba41e02.png">
+Zo ziet het dashboard van de database met de verschillende collecties eruit.
+
+### Connectie krijgen met de database
+Om een connectie met de database op te zetten kan je op de website een url aanvragen. In deze url moet je alleen nog je developer gebruikersnaam
+en wachtwoord toevoegen. 
+````
+mongoose.connect(dbURI, { useNewUrlParser: true, useUnifiedTopology: true })
+  .then((result) => app.listen(3500), console.log('Mongodb connected'))
+  .catch((error) => console.log(error + 'has occured'))
+````
+### Schema opstellen
+Om de data te structureren hebben wij in een Javascript bestand een Schema opgezet. In dit schema's maken we titels aan en willen wij weten
+om wat voor data het gaat. Dit kan bijvoorbeeld een String, Array of Boolean zijn.
+````
+const mongoose = require('mongoose');
+const Schema = mongoose.Schema;
+
+//This is how the structure of the data is going to look like
+const blogSchema = new Schema({
+    name: {
+        type: String,
+        required: true
+    },
+    email: {
+        type: String,
+        required: true
+    },
+    password: {
+        type: String,
+        required: true
+    },
+    favorites: {
+        type: [String],
+        required: false
+    },
+    dominant: {
+        type: Number,
+        required: false
+    },
+    interactive: {
+        type: Number,
+        required: false
+    },
+    stable: {
+        type: Number,
+        required: false
+    },
+    conscientious: {
+        type: Number,
+        required: false
+    }
+}, { timestamps: true });
+
+//Blog is user
+
+const Blog = mongoose.model('Blog', blogSchema);
+module.exports = Blog;
+````
+Dit datamodel wordt later weer geexporteerd naar het app.js bestand zodat de data daadwerkelijk erin kan worden gezet. Omdat de titel het 
+enkelvoud is van de meervoudige collectie naam, weet Mongoose precies om welke collectie het gaat.
+
+### Data opslaan
+Het data opslaan wordt bij de code uitleg hieronder uitgelegd.
+
 
 ## Code uitgelegd
 Hieronder gaan wij alle functionaliteiten van de code en de werking daarvan bespreken. De webapplicatie is server side gerenderd door middel van 
