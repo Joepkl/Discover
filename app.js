@@ -13,7 +13,7 @@ const session = require('express-session');
 const methodOverride = require('method-override');
 const path = require('path');
 
-const port = process.env.PORT || 3500;
+const port = process.env.PORT || 4200;
 
 //CONNECTION TO MONGODB DATABASE  
 const mongoose = require('mongoose');
