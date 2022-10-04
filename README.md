@@ -7,6 +7,10 @@ van deze resultaten kan Discover gerelateerde vacatures inladen. Wij hebben in t
 met het CMD Agency. In deze zes weken hebben wij per week geiterreerd en gekeken wat het beste bij het eindproduct zou passen.
 Uiteindelijk zijn wij tot een succesvol product gekomen waarin alle kern functionaliteiten werkzaam zijn.
 
+# Design rationale
+
+
+
 ## De opdracht
 De opdracht is om een vacaturebank te ontwikkelen waar mensen, vaak net afgestudeerd of opleiding niet afgemaakt op zoek
 kunnen gaan naar hun eigen kwaliteiten en eigenschappen. Het is de bedoeling dat deze mensen aan de hand van een DISC
