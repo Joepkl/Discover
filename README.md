@@ -8,7 +8,7 @@ met het CMD Agency. In deze zes weken hebben wij per week geiterreerd en gekeken
 Uiteindelijk zijn wij tot een succesvol product gekomen waarin alle kern functionaliteiten werkzaam zijn.
 
 # Design rationale
-
+https://github.com/Joepkl/Discover/blob/main/designrationaleMP.pdf
 
 
 ## De opdracht
